@@ -1,0 +1,14 @@
+﻿{
+    "name":  "grover_3q_marked_111",
+    "circuit":  {
+                    "format":  "openqasm2",
+                    "source":  "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\nh q[1];\nh q[2];\nh q[2];\nccx q[0],q[1],q[2];\nh q[2];\nh q[0];\nh q[1];\nh q[2];\nx q[0];\nx q[1];\nx q[2];\nh q[2];\nccx q[0],q[1],q[2];\nh q[2];\nx q[0];\nx q[1];\nx q[2];\nh q[0];\nh q[1];\nh q[2];\nmeasure q[0] -\u003e c[0];\nmeasure q[1] -\u003e c[1];\nmeasure q[2] -\u003e c[2];"
+                },
+    "shots":  1024,
+    "execution":  {
+                      "strategy":  "fastest",
+                      "backend_type":  "any",
+                      "objective":  "min_latency",
+                      "provider":  "qiskit"
+                  }
+}

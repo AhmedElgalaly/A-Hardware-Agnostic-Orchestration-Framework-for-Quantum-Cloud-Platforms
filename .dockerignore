@@ -1,0 +1,14 @@
+.git
+.pytest_cache
+__pycache__
+*.py[cod]
+*.db
+*.sqlite
+*.sqlite3
+.venv
+venv
+env
+.env
+Dockerfile
+docker-compose.yml
+uvicorn.*.log

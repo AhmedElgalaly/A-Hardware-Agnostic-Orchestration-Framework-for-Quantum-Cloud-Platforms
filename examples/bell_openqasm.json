@@ -1,0 +1,15 @@
+{
+  "name": "bell_state_openqasm",
+  "circuit": {
+    "format": "openqasm2",
+    "source": "OPENQASM 2.0; include \"qelib1.inc\"; qreg q[2]; creg c[2]; h q[0]; cx q[0], q[1]; measure q -> c;"
+  },
+  "shots": 1024,
+  "execution": {
+    "strategy": "fastest",
+    "backend_type": "any",
+    "provider": "auto",
+    "objective": "min_latency",
+    "min_qubits": 2
+  }
+}

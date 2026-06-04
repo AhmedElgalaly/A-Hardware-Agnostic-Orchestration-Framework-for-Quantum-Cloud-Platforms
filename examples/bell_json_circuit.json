@@ -1,0 +1,21 @@
+{
+  "name": "bell_state_json",
+  "circuit": {
+    "format": "json",
+    "qubits": 2,
+    "classical_bits": 2,
+    "gates": [
+      {"name": "h", "targets": [0]},
+      {"name": "cx", "controls": [0], "targets": [1]},
+      {"name": "measure", "targets": [0, 1]}
+    ]
+  },
+  "shots": 1024,
+  "execution": {
+    "strategy": "fastest",
+    "backend_type": "simulator",
+    "provider": "auto",
+    "objective": "min_latency",
+    "min_qubits": 2
+  }
+}

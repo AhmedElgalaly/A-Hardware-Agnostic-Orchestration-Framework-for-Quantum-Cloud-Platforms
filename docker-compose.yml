@@ -1,0 +1,102 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: quantum-orchestrator-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  quantum-orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quantum-orchestrator
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    env_file:
+      - .env
+    environment:
+      APP_ENV: development
+      DATABASE_URL: sqlite:////data/quantum_jobs.db
+      RESULTS_DIR: /data/job_results
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      CELERY_TASK_ALWAYS_EAGER: "false"
+      FRONTEND_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
+    ports:
+      - "8000:8000"
+    volumes:
+      - quantum-orchestrator-data:/data
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  quantum-orchestrator-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quantum-orchestrator-worker
+    # solo pool => the executing process exports Prometheus metrics on :9100
+    command: celery -A app.celery_app worker --loglevel=info --pool=solo
+    env_file:
+      - .env
+    environment:
+      APP_ENV: development
+      DATABASE_URL: sqlite:////data/quantum_jobs.db
+      RESULTS_DIR: /data/job_results
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      CELERY_TASK_ALWAYS_EAGER: "false"
+      WORKER_METRICS_PORT: "9100"
+    expose:
+      - "9100"
+    volumes:
+      - quantum-orchestrator-data:/data
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: quantum-orchestrator-prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - quantum-orchestrator
+      - quantum-orchestrator-worker
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: quantum-orchestrator-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  quantum-orchestrator-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://127.0.0.1:8000
+    container_name: quantum-orchestrator-frontend
+    depends_on:
+      - quantum-orchestrator
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+
+volumes:
+  quantum-orchestrator-data:
+  grafana-data:
