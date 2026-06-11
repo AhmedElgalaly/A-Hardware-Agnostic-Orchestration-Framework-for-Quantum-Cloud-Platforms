@@ -98,27 +98,44 @@ class AzureQuantumAdapter(QuantumBackendAdapter):
         return self._caps_cache
 
     def _discover_capabilities(self) -> list[BackendCapability]:
+        import logging
+
+        logger = logging.getLogger("quantum_orchestrator")
         caps: list[BackendCapability] = []
         try:
-            for backend in self._provider_client.backends():
-                name = str(backend.name())
-                config = backend.configuration()
-                is_sim = "simulator" in name.lower() or getattr(config, "simulator", False)
+            backends = self._provider_client.backends()
+        except Exception as exc:
+            logger.warning("Azure backend discovery failed: %s: %s", type(exc).__name__, exc)
+            return []
+
+        for backend in backends:
+            try:
+                name = _backend_name(backend)
+                config = getattr(backend, "configuration", None)
+                config = config() if callable(config) else None
+                is_sim = "simulator" in name.lower() or bool(getattr(config, "simulator", False))
+                num_qubits = getattr(config, "n_qubits", None) or getattr(backend, "num_qubits", 0) or 0
+                basis = list(getattr(config, "basis_gates", None) or getattr(backend, "operation_names", []) or [])
                 caps.append(
                     BackendCapability(
                         provider=self._provider,
                         backend_name=name,
                         backend_type=BackendType.simulator if is_sim else BackendType.hardware,
-                        num_qubits=getattr(config, "n_qubits", 0) or 0,
-                        native_gates=list(getattr(config, "basis_gates", []) or []),
+                        num_qubits=int(num_qubits),
+                        native_gates=basis,
                         topology="azure_target",
                         noise_model_available=False,
                         estimated_latency_ms=4000 if is_sim else 60000,
                         metadata={"sdk": "azure-quantum"},
                     )
                 )
-        except Exception:
-            return []
+            except Exception as exc:  # one malformed target must not hide the rest
+                logger.warning("Azure target skipped during discovery: %s: %s", type(exc).__name__, exc)
+        if not caps:
+            logger.warning(
+                "Azure is authenticated but no targets were discovered. Check that your "
+                "workspace has quantum providers added (e.g. IonQ) and that AZURE_LOCATION matches."
+            )
         return caps
 
     def supports_backend(self, backend_name: str) -> bool:
@@ -157,3 +174,10 @@ class AzureQuantumAdapter(QuantumBackendAdapter):
             )
         except Exception as exc:
             return normalize_failure(backend_capability, job_request.shots, str(exc), circuit.internal.metadata)
+
+
+def _backend_name(backend) -> str:
+    """Return a backend's name across Qiskit versions, where `name` may be a
+    string property (BackendV2) or a callable method (BackendV1)."""
+    name = getattr(backend, "name", None)
+    return str(name() if callable(name) else name)

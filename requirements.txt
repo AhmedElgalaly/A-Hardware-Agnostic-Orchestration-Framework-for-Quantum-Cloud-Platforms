@@ -15,5 +15,7 @@ httpx>=0.27.0
 # Uncomment (or install separately) the providers you intend to use.
 qiskit-ibm-runtime>=0.20.0
 amazon-braket-sdk>=1.70.0
-# azure-quantum>=2.0.0
+azure-quantum[qiskit]>=2.0.0
+azure-identity>=1.15.0
+qsharp>=1.0.0
 qiskit-braket-provider>=0.4.0
