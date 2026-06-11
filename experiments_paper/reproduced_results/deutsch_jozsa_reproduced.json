@@ -1,0 +1,12 @@
+{
+  "experiment": "Deutsch-Jozsa (balanced)",
+  "circuit": "deutsch_jozsa.qasm",
+  "backend": "aer_simulator",
+  "shots": 1024,
+  "depth_before_transpile": 7,
+  "depth_after_transpile": 6,
+  "counts": {
+    "111": 1024
+  },
+  "expected_per_paper": "non-zero (balanced)"
+}

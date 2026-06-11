@@ -1,0 +1,27 @@
+{
+  "experiment": "QAOA Max-Cut (4-node, p=1)",
+  "circuit": "qaoa_maxcut.qasm",
+  "backend": "aer_simulator",
+  "shots": 1024,
+  "depth_before_transpile": 18,
+  "depth_after_transpile": 18,
+  "counts": {
+    "1001": 179,
+    "1010": 108,
+    "1100": 117,
+    "0011": 102,
+    "0110": 163,
+    "0010": 74,
+    "1011": 49,
+    "0101": 94,
+    "0001": 10,
+    "1101": 49,
+    "0000": 12,
+    "0100": 42,
+    "1000": 4,
+    "1110": 5,
+    "1111": 9,
+    "0111": 7
+  },
+  "expected_per_paper": "0110 and 1001"
+}

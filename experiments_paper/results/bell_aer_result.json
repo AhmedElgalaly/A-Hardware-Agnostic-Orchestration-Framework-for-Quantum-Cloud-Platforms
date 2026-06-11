@@ -1,0 +1,82 @@
+{
+  "job_id": "8d1e6005-2d89-43b6-9210-90e36dfc345a",
+  "name": "bell_state_frontend",
+  "request_body": {
+    "name": "bell_state_frontend",
+    "circuit": {
+      "format": "openqasm2",
+      "source": "OPENQASM 2.0; include \"qelib1.inc\"; qreg q[2]; creg c[2]; h q[0]; cx q[0], q[1]; measure q -> c;",
+      "qubits": null,
+      "classical_bits": null,
+      "gates": null
+    },
+    "shots": 1024,
+    "execution": {
+      "strategy": "fastest",
+      "backend_type": "any",
+      "provider": "auto",
+      "objective": "min_latency",
+      "min_qubits": 2
+    }
+  },
+  "strategy": "fastest",
+  "status": "completed",
+  "selected_backends": [
+    {
+      "provider": "qiskit",
+      "backend_name": "aer_simulator",
+      "backend_type": "simulator",
+      "num_qubits": 32,
+      "native_gates": [
+        "h",
+        "x",
+        "y",
+        "z",
+        "rx",
+        "ry",
+        "rz",
+        "cx",
+        "cz",
+        "measure"
+      ],
+      "topology": "fully_connected_simulated",
+      "noise_model_available": false,
+      "estimated_latency_ms": 50.0,
+      "queue_time_ms": null,
+      "fidelity": null,
+      "coupling_map": null,
+      "metadata": {
+        "sdk": "qiskit-aer",
+        "local": true
+      }
+    }
+  ],
+  "results": [
+    {
+      "provider": "qiskit",
+      "backend": "aer_simulator",
+      "backend_type": "simulator",
+      "status": "completed",
+      "shots": 1024,
+      "counts": {
+        "00": 501,
+        "11": 523
+      },
+      "metrics": {
+        "execution_time_ms": 109.971,
+        "depth_before_transpile": 3,
+        "depth_after_transpile": 3,
+        "num_qubits": 2,
+        "operation_count": 4,
+        "selected_backend": "aer_simulator",
+        "provider": "qiskit",
+        "status": "completed",
+        "timestamp": "2026-06-01T21:13:39.587631+00:00"
+      },
+      "error": null
+    }
+  ],
+  "errors": [],
+  "created_at": "2026-06-01T21:13:32.965616+00:00",
+  "updated_at": "2026-06-01T21:13:39.588298+00:00"
+}

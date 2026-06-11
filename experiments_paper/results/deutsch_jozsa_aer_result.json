@@ -1,0 +1,81 @@
+{
+  "job_id": "2c06fa01-8c66-4512-9c36-e7b7607efae6",
+  "name": "deutsch_jozsa_balanced",
+  "request_body": {
+    "name": "deutsch_jozsa_balanced",
+    "circuit": {
+      "format": "openqasm2",
+      "source": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[4];\ncreg c[3];\nx q[3];\nh q[0];\nh q[1];\nh q[2];\nh q[3];\ncx q[0],q[3];\ncx q[1],q[3];\ncx q[2],q[3];\nh q[0];\nh q[1];\nh q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];",
+      "qubits": null,
+      "classical_bits": null,
+      "gates": null
+    },
+    "shots": 1024,
+    "execution": {
+      "strategy": "fastest",
+      "backend_type": "any",
+      "provider": "qiskit",
+      "objective": "min_latency",
+      "min_qubits": null
+    }
+  },
+  "strategy": "fastest",
+  "status": "completed",
+  "selected_backends": [
+    {
+      "provider": "qiskit",
+      "backend_name": "aer_simulator",
+      "backend_type": "simulator",
+      "num_qubits": 32,
+      "native_gates": [
+        "h",
+        "x",
+        "y",
+        "z",
+        "rx",
+        "ry",
+        "rz",
+        "cx",
+        "cz",
+        "measure"
+      ],
+      "topology": "fully_connected_simulated",
+      "noise_model_available": false,
+      "estimated_latency_ms": 50.0,
+      "queue_time_ms": null,
+      "fidelity": null,
+      "coupling_map": null,
+      "metadata": {
+        "sdk": "qiskit-aer",
+        "local": true
+      }
+    }
+  ],
+  "results": [
+    {
+      "provider": "qiskit",
+      "backend": "aer_simulator",
+      "backend_type": "simulator",
+      "status": "completed",
+      "shots": 1024,
+      "counts": {
+        "111": 1024
+      },
+      "metrics": {
+        "execution_time_ms": 91.138,
+        "depth_before_transpile": 7,
+        "depth_after_transpile": 6,
+        "num_qubits": 4,
+        "operation_count": 14,
+        "selected_backend": "aer_simulator",
+        "provider": "qiskit",
+        "status": "completed",
+        "timestamp": "2026-06-03T19:31:19.488113+00:00"
+      },
+      "error": null
+    }
+  ],
+  "errors": [],
+  "created_at": "2026-06-03T19:30:41.939231+00:00",
+  "updated_at": "2026-06-03T19:31:19.494591+00:00"
+}

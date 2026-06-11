@@ -1,0 +1,96 @@
+{
+  "job_id": "2d9aa8a2-6e6b-42bf-bdcb-ff4dc1258ce4",
+  "name": "qaoa_maxcut_4node",
+  "request_body": {
+    "name": "qaoa_maxcut_4node",
+    "circuit": {
+      "format": "openqasm2",
+      "source": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[4];\ncreg c[4];\nh q[0];\nh q[1];\nh q[2];\nh q[3];\ncx q[0],q[1];\nrz(9*pi/5) q[1];\ncx q[0],q[1];\ncx q[0],q[2];\nrz(9*pi/5) q[2];\ncx q[0],q[2];\ncx q[1],q[2];\nrz(9*pi/5) q[2];\ncx q[1],q[2];\ncx q[1],q[3];\nrz(9*pi/5) q[3];\ncx q[1],q[3];\ncx q[2],q[3];\nrz(9*pi/5) q[3];\ncx q[2],q[3];\nrx(pi/5) q[0];\nrx(pi/5) q[1];\nrx(pi/5) q[2];\nrx(pi/5) q[3];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\nmeasure q[3] -> c[3];",
+      "qubits": null,
+      "classical_bits": null,
+      "gates": null
+    },
+    "shots": 1024,
+    "execution": {
+      "strategy": "fastest",
+      "backend_type": "any",
+      "provider": "qiskit",
+      "objective": "min_latency",
+      "min_qubits": null
+    }
+  },
+  "strategy": "fastest",
+  "status": "completed",
+  "selected_backends": [
+    {
+      "provider": "qiskit",
+      "backend_name": "aer_simulator",
+      "backend_type": "simulator",
+      "num_qubits": 32,
+      "native_gates": [
+        "h",
+        "x",
+        "y",
+        "z",
+        "rx",
+        "ry",
+        "rz",
+        "cx",
+        "cz",
+        "measure"
+      ],
+      "topology": "fully_connected_simulated",
+      "noise_model_available": false,
+      "estimated_latency_ms": 50.0,
+      "queue_time_ms": null,
+      "fidelity": null,
+      "coupling_map": null,
+      "metadata": {
+        "sdk": "qiskit-aer",
+        "local": true
+      }
+    }
+  ],
+  "results": [
+    {
+      "provider": "qiskit",
+      "backend": "aer_simulator",
+      "backend_type": "simulator",
+      "status": "completed",
+      "shots": 1024,
+      "counts": {
+        "0000": 11,
+        "0001": 8,
+        "0010": 52,
+        "0011": 104,
+        "0100": 51,
+        "0101": 77,
+        "0110": 186,
+        "0111": 13,
+        "1000": 9,
+        "1001": 176,
+        "1010": 98,
+        "1011": 50,
+        "1100": 99,
+        "1101": 66,
+        "1110": 10,
+        "1111": 14
+      },
+      "metrics": {
+        "execution_time_ms": 103.923,
+        "depth_before_transpile": 18,
+        "depth_after_transpile": 18,
+        "num_qubits": 4,
+        "operation_count": 27,
+        "selected_backend": "aer_simulator",
+        "provider": "qiskit",
+        "status": "completed",
+        "timestamp": "2026-06-03T19:31:49.023313+00:00"
+      },
+      "error": null
+    }
+  ],
+  "errors": [],
+  "created_at": "2026-06-03T19:30:42.068955+00:00",
+  "updated_at": "2026-06-03T19:31:49.035219+00:00"
+}

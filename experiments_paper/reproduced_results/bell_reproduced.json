@@ -1,0 +1,13 @@
+{
+  "experiment": "Bell state",
+  "circuit": "bell.qasm",
+  "backend": "aer_simulator",
+  "shots": 1024,
+  "depth_before_transpile": 3,
+  "depth_after_transpile": 3,
+  "counts": {
+    "00": 500,
+    "11": 524
+  },
+  "expected_per_paper": "00 and 11 (~50/50)"
+}

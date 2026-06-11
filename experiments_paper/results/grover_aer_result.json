@@ -1,0 +1,88 @@
+{
+  "job_id": "e81e695d-7aca-4be8-aa99-8e0959dc5f7f",
+  "name": "grover_3q_marked_111",
+  "request_body": {
+    "name": "grover_3q_marked_111",
+    "circuit": {
+      "format": "openqasm2",
+      "source": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\nh q[1];\nh q[2];\nh q[2];\nccx q[0],q[1],q[2];\nh q[2];\nh q[0];\nh q[1];\nh q[2];\nx q[0];\nx q[1];\nx q[2];\nh q[2];\nccx q[0],q[1],q[2];\nh q[2];\nx q[0];\nx q[1];\nx q[2];\nh q[0];\nh q[1];\nh q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];",
+      "qubits": null,
+      "classical_bits": null,
+      "gates": null
+    },
+    "shots": 1024,
+    "execution": {
+      "strategy": "fastest",
+      "backend_type": "any",
+      "provider": "qiskit",
+      "objective": "min_latency",
+      "min_qubits": null
+    }
+  },
+  "strategy": "fastest",
+  "status": "completed",
+  "selected_backends": [
+    {
+      "provider": "qiskit",
+      "backend_name": "aer_simulator",
+      "backend_type": "simulator",
+      "num_qubits": 32,
+      "native_gates": [
+        "h",
+        "x",
+        "y",
+        "z",
+        "rx",
+        "ry",
+        "rz",
+        "cx",
+        "cz",
+        "measure"
+      ],
+      "topology": "fully_connected_simulated",
+      "noise_model_available": false,
+      "estimated_latency_ms": 50.0,
+      "queue_time_ms": null,
+      "fidelity": null,
+      "coupling_map": null,
+      "metadata": {
+        "sdk": "qiskit-aer",
+        "local": true
+      }
+    }
+  ],
+  "results": [
+    {
+      "provider": "qiskit",
+      "backend": "aer_simulator",
+      "backend_type": "simulator",
+      "status": "completed",
+      "shots": 1024,
+      "counts": {
+        "000": 25,
+        "001": 37,
+        "010": 30,
+        "011": 37,
+        "100": 34,
+        "101": 32,
+        "110": 37,
+        "111": 792
+      },
+      "metrics": {
+        "execution_time_ms": 100.283,
+        "depth_before_transpile": 12,
+        "depth_after_transpile": 6,
+        "num_qubits": 3,
+        "operation_count": 24,
+        "selected_backend": "aer_simulator",
+        "provider": "qiskit",
+        "status": "completed",
+        "timestamp": "2026-06-03T19:31:33.831520+00:00"
+      },
+      "error": null
+    }
+  ],
+  "errors": [],
+  "created_at": "2026-06-03T19:30:42.008933+00:00",
+  "updated_at": "2026-06-03T19:31:33.840852+00:00"
+}

@@ -1,0 +1,82 @@
+{
+  "job_id": "e573be58-f9ab-415e-a078-268c6de58f47",
+  "name": "GHZ-State-1",
+  "request_body": {
+    "name": "GHZ-State-1",
+    "circuit": {
+      "format": "openqasm2",
+      "source": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\n\nqreg q[3];\ncreg c[3];\n\nh q[0];\ncx q[0], q[1];\ncx q[1], q[2];\n\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];",
+      "qubits": null,
+      "classical_bits": null,
+      "gates": null
+    },
+    "shots": 1024,
+    "execution": {
+      "strategy": "fastest",
+      "backend_type": "any",
+      "provider": "auto",
+      "objective": "min_latency",
+      "min_qubits": 2
+    }
+  },
+  "strategy": "fastest",
+  "status": "completed",
+  "selected_backends": [
+    {
+      "provider": "qiskit",
+      "backend_name": "aer_simulator",
+      "backend_type": "simulator",
+      "num_qubits": 32,
+      "native_gates": [
+        "h",
+        "x",
+        "y",
+        "z",
+        "rx",
+        "ry",
+        "rz",
+        "cx",
+        "cz",
+        "measure"
+      ],
+      "topology": "fully_connected_simulated",
+      "noise_model_available": false,
+      "estimated_latency_ms": 50.0,
+      "queue_time_ms": null,
+      "fidelity": null,
+      "coupling_map": null,
+      "metadata": {
+        "sdk": "qiskit-aer",
+        "local": true
+      }
+    }
+  ],
+  "results": [
+    {
+      "provider": "qiskit",
+      "backend": "aer_simulator",
+      "backend_type": "simulator",
+      "status": "completed",
+      "shots": 1024,
+      "counts": {
+        "000": 510,
+        "111": 514
+      },
+      "metrics": {
+        "execution_time_ms": 186.873,
+        "depth_before_transpile": 4,
+        "depth_after_transpile": 4,
+        "num_qubits": 3,
+        "operation_count": 6,
+        "selected_backend": "aer_simulator",
+        "provider": "qiskit",
+        "status": "completed",
+        "timestamp": "2026-06-03T08:06:05.238966+00:00"
+      },
+      "error": null
+    }
+  ],
+  "errors": [],
+  "created_at": "2026-06-03T06:50:25.978572+00:00",
+  "updated_at": "2026-06-03T08:06:05.250192+00:00"
+}

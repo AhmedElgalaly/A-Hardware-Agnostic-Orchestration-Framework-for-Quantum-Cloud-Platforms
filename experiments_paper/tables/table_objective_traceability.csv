@@ -1,0 +1,8 @@
+objective,outcome_and_evidence
+Unified API across providers,Met. One REST API and web UI; same circuit ran on Aer and ibm_fez unchanged
+Selection and fallback,Met. fastest and benchmark_all; per-backend failure yields a partial job
+Multiple circuit formats,Met. OpenQASM 2 and provider-independent JSON parse into one internal model
+Integrate multiple providers,Met. One circuit ran on Aer and on real QPUs from IBM (3) and AWS Braket (5) in one benchmark; Azure validated on a simulator target
+Monitoring and diagnostics,Met. Prometheus/Grafana stack and a /providers diagnostics endpoint
+"Scalable, reliable core",Partially met. FastAPI/Celery/Redis async core; SQLite/filesystem for local scope
+Developer SDKs and tools,Deferred to future work; REST API and web UI serve as the interface

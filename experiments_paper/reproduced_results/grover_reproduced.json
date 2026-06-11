@@ -1,0 +1,19 @@
+{
+  "experiment": "Grover (mark 111)",
+  "circuit": "grover.qasm",
+  "backend": "aer_simulator",
+  "shots": 1024,
+  "depth_before_transpile": 12,
+  "depth_after_transpile": 6,
+  "counts": {
+    "111": 818,
+    "101": 35,
+    "010": 29,
+    "011": 24,
+    "001": 28,
+    "100": 26,
+    "000": 30,
+    "110": 34
+  },
+  "expected_per_paper": "111 amplified (~77%)"
+}

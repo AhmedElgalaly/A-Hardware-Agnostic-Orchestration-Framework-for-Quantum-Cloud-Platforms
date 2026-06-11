@@ -1,0 +1,55 @@
+{
+  "project": "U-QaaS",
+  "paper_title": "U-QaaS: A Hardware-Agnostic Orchestration Framework for Quantum Cloud Platforms",
+  "artifact_purpose": "Reproducibility artifacts for the experiments reported in the paper",
+  "generated": "2026-06-11",
+  "shots": 1024,
+  "source_of_truth": "Normalised job records persisted by the running platform in its SQLite job store (the Docker volume database /data/quantum_jobs.db). The result/ JSON files in this folder are exact copies of those persisted records.",
+  "software_versions": {
+    "python": "3.12.13",
+    "qiskit": "2.4.1",
+    "qiskit_aer": "0.17.2",
+    "qiskit_ibm_runtime": "0.47.0",
+    "amazon_braket_sdk": "1.119.1",
+    "azure_quantum": "3.10.0",
+    "fastapi": "0.136.3",
+    "celery": "5.6.3",
+    "redis": "8.0.0"
+  },
+  "simulator_runs": [
+    {"experiment": "Bell state", "backend": "aer_simulator", "provider": "qiskit", "result": "results/bell_aer_result.json"},
+    {"experiment": "GHZ state", "backend": "aer_simulator", "provider": "qiskit", "result": "results/ghz_aer_result.json"},
+    {"experiment": "Bernstein-Vazirani (s=101)", "backend": "aer_simulator", "provider": "qiskit", "result": "results/bernstein_vazirani_aer_result.json"},
+    {"experiment": "Deutsch-Jozsa (balanced)", "backend": "aer_simulator", "provider": "qiskit", "result": "results/deutsch_jozsa_aer_result.json"},
+    {"experiment": "Grover (mark 111)", "backend": "aer_simulator", "provider": "qiskit", "result": "results/grover_aer_result.json"},
+    {"experiment": "QAOA Max-Cut (4-node, p=1)", "backend": "aer_simulator", "provider": "qiskit", "result": "results/qaoa_maxcut_aer_result.json"}
+  ],
+  "qaoa_grid_search": {
+    "note": "Angles selected by a classical grid search over multiples of pi/20 (see Implementation/run_algorithms.py).",
+    "gamma": "approx 2.827 (= 18*pi/20)",
+    "beta": "approx 0.314 (= 2*pi/20)"
+  },
+  "hardware_runs": [
+    {"provider": "ibm", "backend": "ibm_fez", "experiment": "Bell state (fastest)", "status": "completed", "shots": 1024, "execution_date": "2026-06-01", "job_id": "1cf75ddd-da5f-4e51-aefd-ae04167a2f6e", "result": "results/bell_ibm_fez_result.json", "note": "Counts 00:484, 01:25, 10:31, 11:484; transpiled depth 3->8."},
+    {"provider": "ibm", "backend": "ibm_kingston", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "ibm", "backend": "ibm_marrakesh", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "aws_braket", "backend": "cepheus-1-108q", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "aws_braket", "backend": "emerald", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "aws_braket", "backend": "forte_enterprise_1", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "aws_braket", "backend": "garnet", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "aws_braket", "backend": "ibex_q1", "experiment": "Bell state (benchmark_all)", "status": "completed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json"},
+    {"provider": "aws_braket", "backend": "tn1", "experiment": "Bell state (benchmark_all)", "status": "failed", "shots": 1024, "execution_date": "2026-06-03", "job_id": "977d2d64-2beb-4874-8f66-bce924c4f910", "result": "results/bell_benchmark_all_result.json", "note": "Managed simulator returned a per-backend error; overall job status partial."}
+  ],
+  "azure_quantum": {
+    "status": "validated on a provider SIMULATOR target only (rigetti.sim.qvm); no Azure paid-QPU run was performed",
+    "note": "See MISSING_ARTIFACTS.md."
+  },
+  "automated_tests": {
+    "total": 38,
+    "passed_on_clean_db": 38,
+    "evidence": "logs/pytest_output.txt",
+    "note": "Run on a clean database (fresh-clone condition); see logs/test_summary.md."
+  },
+  "test_count_history": "An earlier thesis draft stated 36 tests; the current suite has 38 and all pass. The paper has been updated to 38.",
+  "security_note": "Provider credentials, API tokens, environment files (.env) and local secrets are intentionally excluded. The normalised result records never contain credentials by design."
+}

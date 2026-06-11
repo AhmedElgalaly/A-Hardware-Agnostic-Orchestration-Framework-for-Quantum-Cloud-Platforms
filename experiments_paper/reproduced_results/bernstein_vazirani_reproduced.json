@@ -1,0 +1,12 @@
+{
+  "experiment": "Bernstein-Vazirani (s=101)",
+  "circuit": "bernstein_vazirani.qasm",
+  "backend": "aer_simulator",
+  "shots": 1024,
+  "depth_before_transpile": 6,
+  "depth_after_transpile": 5,
+  "counts": {
+    "101": 1024
+  },
+  "expected_per_paper": "101"
+}

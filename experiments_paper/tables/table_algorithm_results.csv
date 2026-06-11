@@ -1,0 +1,5 @@
+algorithm,qubits,depth_in,depth_out,ideal_outcome,measured_top_outcomes
+Bernstein-Vazirani (s=101),4,6,5,101 in one query,101:1024
+Deutsch-Jozsa (balanced),4,7,6,non-zero (balanced),111:1024
+"Grover (mark 111, 1 iter)",3,12,6,111 amplified,111:792; 001:37
+"QAOA Max-Cut (4-node, p=1)",4,18,18,"cut=4: 0110,1001",0110:186; 1001:176
