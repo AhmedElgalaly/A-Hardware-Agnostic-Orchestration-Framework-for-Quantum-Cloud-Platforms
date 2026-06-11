@@ -1,4 +1,8 @@
-# A Hardware-Agnostic Orchestration Framework for Quantum Cloud Platforms
+# U-QaaS: Unified Quantum Computing as a Service Platform
+
+[![DOI](https://zenodo.org/badge/1259080268.svg)](https://doi.org/10.5281/zenodo.20646133)
+
+A hardware-agnostic orchestration framework for quantum cloud platforms.
 
 This project proposes a hardware-agnostic orchestration framework for quantum cloud platforms. It allows researchers and developers to submit quantum circuits in OpenQASM or JSON format and execute them either on the fastest compatible backend or across all compatible backends for benchmarking. The framework abstracts provider-specific SDKs through adapters, models backend capabilities, normalizes results, and helps researchers compare heterogeneous quantum systems more easily.
 
